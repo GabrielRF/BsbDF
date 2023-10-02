@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  neoenergia:
+  links_history:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -17,11 +17,11 @@ jobs:
         continue-on-error: true
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: cron.yml
+          workflow: neoenergia.yml
           workflow_conclusion: success
       - name: Move database
         continue-on-error: true
-        run: mv bsbdf/links_history.db.db links_history.db
+        run: mv links_history/links_history.db links_history.db
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
