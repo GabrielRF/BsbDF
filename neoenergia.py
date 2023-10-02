@@ -1,6 +1,6 @@
+import base
 import os
 import requests
-import sqlite3
 import telebot
 import telegraph
 from bs4 import BeautifulSoup
@@ -25,23 +25,6 @@ def get_news_content(link):
     for p in text_content[0:-3]:
         full_text = f'{full_text}\n{p.text}'
     return subtitle.text, full_text, image
-
-def add_to_history(link):
-    conn = sqlite3.connect('links_history.db')
-    cursor = conn.cursor()
-    aux = f'INSERT INTO history (link) VALUES ("{link}")'
-    cursor.execute(aux)
-    conn.commit()
-    conn.close()
-
-def check_history(link):
-    conn = sqlite3.connect('links_history.db')
-    cursor = conn.cursor()
-    aux = f'SELECT * from history WHERE link="{link}"'
-    cursor.execute(aux)
-    data = cursor.fetchone()
-    conn.close()
-    return data
 
 def create_telegraph_post(title, subtitle, full_text, link, image):
     telegraph_auth = telegraph.Telegraph(
@@ -73,10 +56,10 @@ if __name__ == "__main__":
     noticias = html.find('div', {'class': 'neo-card-noticia__container'})
     for noticia in noticias.findAll('article', {'class': 'neo-card-noticia__card'})[:5]:
         link = f"https://www.neoenergia.com{noticia.find('a')['href']}"
-        if check_history(link):
+        if base.check_history(link):
             continue
         title = noticia.find('a')['title']
         subtitle, full_text, image = get_news_content(link)
         iv_link = create_telegraph_post(title, subtitle, full_text, link, image)
         send_message(title, iv_link, link)
-        add_to_history(link)
+        base.add_to_history(link)
