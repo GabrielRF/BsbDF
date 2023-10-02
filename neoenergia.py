@@ -47,7 +47,7 @@ def send_message(title, iv_link, link):
     bot.send_message(
         os.environ.get(f'DESTINATION'),
         f'<a href="{iv_link}">󠀠</a><b>{title}</b>\n' 
-        f'⚡️ <a href="{link}">Neoenergia</a>',
+        f'⚡️ <a href="{link}">Site Neoenergia</a>',
         parse_mode='HTML'
     )
 
@@ -59,7 +59,10 @@ if __name__ == "__main__":
         if base.check_history(link):
             continue
         title = noticia.find('a')['title']
-        subtitle, full_text, image = get_news_content(link)
+        try:
+            subtitle, full_text, image = get_news_content(link)
+        except:
+            continue
         iv_link = create_telegraph_post(title, subtitle, full_text, link, image)
         send_message(title, iv_link, link)
         base.add_to_history(link)
