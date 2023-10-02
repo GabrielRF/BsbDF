@@ -71,7 +71,7 @@ def send_message(title, iv_link, link):
 if __name__ == "__main__":
     html = get_news_list()
     noticias = html.find('div', {'class': 'neo-card-noticia__container'})
-    for noticia in noticias.findAll('article', {'class': 'neo-card-noticia__card'})[:2]:
+    for noticia in noticias.findAll('article', {'class': 'neo-card-noticia__card'})[:5]:
         link = f"https://www.neoenergia.com{noticia.find('a')['href']}"
         if check_history(link):
             continue
