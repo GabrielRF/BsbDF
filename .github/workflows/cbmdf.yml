@@ -17,7 +17,7 @@ jobs:
         continue-on-error: true
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: neoenergia.yml
+          workflow: cbmdf.yml
           workflow_conclusion: success
       - name: Move database
         continue-on-error: true
