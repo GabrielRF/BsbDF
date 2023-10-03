@@ -1,4 +1,4 @@
-name: CBMDF
+name: CAESB
 on:
   workflow_dispatch:
   schedule:
@@ -17,11 +17,11 @@ jobs:
         continue-on-error: true
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: cbmdf.yml
+          workflow: caesb.yml
           workflow_conclusion: success
       - name: Move database
         continue-on-error: true
-        run: mv links_history/links_history.db links_history.db
+        run: mv last_caesb/last_caesb.txt last_caesb.txt
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -29,7 +29,7 @@ jobs:
       - name: Install Requirements
         run: pip install -r requirements.txt
       - name: Run Rss to Telegram
-        run: python cbmdf.py
+        run: python caesb.py
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           TELEGRAPH_TOKEN: ${{ secrets.TELEGRAPH_TOKEN }}
@@ -37,5 +37,5 @@ jobs:
       - name: Upload history
         uses: actions/upload-artifact@v3
         with:
-          name: links_history
-          path: links_history.db
+          name: last_caesb
+          path: last_caesb.txt
