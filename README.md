@@ -10,6 +10,10 @@ Este repositório reúne os scripts usados no canal [@BsbDF](https://t.me/BsbDF)
 
 Funções de base para outros scripts, como adicionar link ao histórico de enviados e verificar no histórico se um link já foi enviado ao canal.
 
+### aeroportobsb.py
+
+Notícias do [Aeroporto de Brasília](https://www.bsb.aero/passageiros/noticias) formatadas para funcionar em modo Leitura Rápida.
+
 ### agenciabrasilia.py
 
 Este arquivo não é executado em uma ação do GitHub por falhar demais quando o servidor fica fora do Brasil. Roda localmente buscando novas notícias do site da [Agência Brasília](https://www.agenciabrasilia.df.gov.br/noticias/).
