@@ -46,12 +46,14 @@ def send_message(message, alert):
     btn_link = types.InlineKeyboardMarkup()
     btn = types.InlineKeyboardButton(f'🌤 Ver Alerta', url=alert['link'])
     btn_link.row(btn)
-    bot.send_message(
+    msg = bot.send_message(
         os.environ.get(f'DESTINATION'),
         message,
         reply_markup=btn_link,
         parse_mode='HTML'
     )
+    bot.pin_chat_message(f'DESTINATION', msg.id, disable_notification=True)
+    bot.delete_message(f'DESTINATION', msg.id+1)
 
 if __name__ == "__main__":
     alert = get_alerts()
