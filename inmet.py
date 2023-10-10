@@ -52,8 +52,15 @@ def send_message(message, alert):
         reply_markup=btn_link,
         parse_mode='HTML'
     )
-    bot.pin_chat_message(f'DESTINATION', msg.id, disable_notification=True)
-    bot.delete_message(f'DESTINATION', msg.id+1)
+    bot.pin_chat_message(
+        os.environ.get(f'DESTINATION'),
+        msg.id,
+        disable_notification=True
+    )
+    bot.delete_message(
+        os.environ.get(f'DESTINATION'),
+        msg.id+1
+    )
 
 if __name__ == "__main__":
     alert = get_alerts()
