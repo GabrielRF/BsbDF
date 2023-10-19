@@ -2,7 +2,6 @@ import base
 import os
 import requests
 import telebot
-import telegraph
 import urllib
 from bs4 import BeautifulSoup
 
