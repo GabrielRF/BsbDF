@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 def get_news_list():
     try:
-        response = requests.get('https://www.agenciabrasilia.df.gov.br/noticias/', timeout=5)
+        response = requests.get('https://www.agenciabrasilia.df.gov.br/noticias/', timeout=5, headers={'User-agent': 'Mozilla/5.1'})
     except requests.exceptions.Timeout:
         return False
     if response.status_code != 200:
@@ -20,7 +20,11 @@ def get_news_list():
 def get_news_content(link):
     print(f'Noticia {link}')
     time.sleep(20)
-    response = requests.get(link, timeout=30)
+    response = requests.get(
+        link,
+        timeout=30,
+        headers={'User-agent': 'Mozilla/5.1'}
+    )
     if response.status_code != 200:
         return False
     response = BeautifulSoup(response.content, 'html.parser')
