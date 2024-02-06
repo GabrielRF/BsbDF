@@ -15,9 +15,14 @@ def send_message(title, iv_link, link):
     bot = telebot.TeleBot(os.environ.get(f'BOT_TOKEN'))
     bot.send_message(
         os.environ.get(f'DESTINATION'),
-        f'<a href="{iv_link}">󠀠</a><b>{title}</b>\n' 
+        f'<b>{title}</b>\n' 
         f'🔥 <a href="{link}">Site CBM DF</a>',
-        parse_mode='HTML'
+        parse_mode='HTML',
+        link_preview_options=telebot.types.LinkPreviewOptions(
+            prefer_large_media=True,
+            show_above_text=False,
+            url=iv_link
+        )
     )
 
 if __name__ == "__main__":
