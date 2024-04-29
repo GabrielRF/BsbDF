@@ -1,0 +1,41 @@
+name: DETRANDF
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */3 * * *'
+
+
+jobs:
+  links_history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Download artifact
+        id: download
+        continue-on-error: true
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: detrandf.yml
+          workflow_conclusion: success
+      - name: Move database
+        continue-on-error: true
+        run: mv last_detrandf/last_detrandf.txt last_detrandf.txt
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - name: Install Requirements
+        run: pip install -r requirements.txt
+      - name: Run Rss to Telegram
+        run: python detrandf.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          TELEGRAPH_TOKEN: ${{ secrets.TELEGRAPH_TOKEN }}
+          DESTINATION: ${{ vars.DESTINATION }}
+      - name: Upload history
+        uses: actions/upload-artifact@v3
+        with:
+          name: last_detrandf
+          path: last_detrandf.txt
