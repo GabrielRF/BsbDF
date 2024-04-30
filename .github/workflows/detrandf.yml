@@ -21,7 +21,7 @@ jobs:
           workflow_conclusion: success
       - name: Move database
         continue-on-error: true
-        run: mv last_detrandf/last_detrandf.db last_detrandf.db
+        run: mv links_history/links_history.db links_history.db
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -37,5 +37,5 @@ jobs:
       - name: Upload history
         uses: actions/upload-artifact@v3
         with:
-          name: last_detrandf
-          path: last_detrandf.db
+          name: links_history
+          path: links_history.db
