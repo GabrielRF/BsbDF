@@ -6,7 +6,7 @@ import urllib
 from bs4 import BeautifulSoup
 
 def get_news_list():
-    response = requests.get('https://www.cbm.df.gov.br/noticias/')
+    response = requests.get('https://www.cbm.df.gov.br/noticias/', verify=False)
     if response.status_code != 200:
         return False
     return BeautifulSoup(response.content, 'html.parser')
