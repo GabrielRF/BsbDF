@@ -68,4 +68,5 @@ if __name__ == "__main__":
         if base.check_history(alert['link']):
             exit()
         send_message(create_message(alert), alert)
+        base.bluesky_post('🌤 INMET Alerta', create_message(alert).split('⚠️')[0], link)
         base.add_to_history(alert['link'])

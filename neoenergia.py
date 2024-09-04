@@ -35,4 +35,5 @@ if __name__ == "__main__":
         title = noticia.find('a')['title']
         iv_link = f'https://t.me/iv?url={urllib.parse.quote_plus(link)}&rhash=a42b721099d581'
         send_message(title, iv_link, link)
+        base.bluesky_post('⚡️ Neoenergia', title, link)
         base.add_to_history(link)

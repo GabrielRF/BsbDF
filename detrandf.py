@@ -35,4 +35,5 @@ if __name__ == "__main__":
         title = noticia.text.strip()
         iv_link = f'https://t.me/iv?url={urllib.parse.quote_plus(link)}&rhash=623c41d124998d' 
         send_message(title, iv_link, link)
+        base.bluesky_post('🚦 Detran DF', title, link)
         base.add_to_history(link)

@@ -35,4 +35,5 @@ if __name__ == "__main__":
             continue
         iv_link = f'https://t.me/iv?url={urllib.parse.quote_plus(link)}&rhash=57bff8b1f34ad4' 
         send_message(title, iv_link, link)
+        base.bluesky_post('🚇 Metro DF', title, link)
         base.add_to_history(link)
