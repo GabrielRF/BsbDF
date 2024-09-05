@@ -41,6 +41,15 @@ def create_message(alert):
     )
     return message
 
+def create_bluesky_message(alert):
+    message = (
+        f'❗️ {alert["event"].title()}\n' +
+        f'Início: {alert["creation"]}\n' +
+        f'Fim: {alert["expires"]}\n' +
+        f'⚠️ {alert["description"]}'
+    )
+    return message
+
 def send_message(message, alert):
     bot = telebot.TeleBot(os.environ.get(f'BOT_TOKEN'))
     btn_link = types.InlineKeyboardMarkup()
@@ -68,5 +77,5 @@ if __name__ == "__main__":
         if base.check_history(alert['link']):
             exit()
         send_message(create_message(alert), alert)
-        base.bluesky_post('🌤 INMET Alerta', create_message(alert).split('⚠️')[0], alert['link'])
+        base.bluesky_post('🌤 INMET Alerta', create_bluesky_message(alert), alert['link'])
         base.add_to_history(alert['link'])
