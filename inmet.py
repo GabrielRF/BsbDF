@@ -45,8 +45,7 @@ def create_bluesky_message(alert):
     message = (
         f'❗️ {alert["event"].title()}\n' +
         f'Início: {alert["creation"]}\n' +
-        f'Fim: {alert["expires"]}\n' +
-        f'⚠️ {alert["description"]}'
+        f'Fim: {alert["expires"]}'
     )
     return message
 
