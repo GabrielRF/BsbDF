@@ -1,4 +1,5 @@
 import base
+import cloudscraper
 import os
 import requests
 import telebot
@@ -6,13 +7,14 @@ import urllib
 from bs4 import BeautifulSoup
 
 def get_news_list():
+    scraper = cloudscraper.create_scraper()
     try:
-        response = requests.get('https://www.agenciabrasilia.df.gov.br/noticias/', timeout=5, headers={'User-agent': 'Mozilla/5.1'})
-    except requests.exceptions.Timeout:
+        response = scraper.get("https://www.agenciabrasilia.df.gov.br/noticias/")
+    except:
         return False
     if response.status_code != 200:
         return False
-    return BeautifulSoup(response.content, 'html.parser')
+    return BeautifulSoup(response.text, 'html.parser')
 
 def send_message(title, iv_link, link):
     bot = telebot.TeleBot(os.environ.get(f'BOT_TOKEN'))
@@ -32,8 +34,7 @@ if __name__ == "__main__":
     html = get_news_list()
     if not html:
         exit()
-    noticias = html.find('div', {'class': 'container'})
-    for noticia in noticias.findAll('div', {'class': 'col-md-12'})[:5]:
+    for noticia in html.findAll('div', {'class': 'content-card-result'})[:5]:
         try:
             link = noticia.find('a')['href']
         except TypeError:
