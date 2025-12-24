@@ -18,7 +18,8 @@ def get_news_list():
 
 def send_message(title, iv_link, link):
     bot = telebot.TeleBot(os.environ.get(f'BOT_TOKEN'))
-    bot.send_message(
+    telebot.util.antiflood(
+        bot.send_message,
         os.environ.get(f'DESTINATION'),
         f'<b>{title}</b>\n' 
         f'🗞 <a href="{link}">Site Agência Brasília</a>',
