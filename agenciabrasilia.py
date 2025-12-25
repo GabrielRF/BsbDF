@@ -46,7 +46,7 @@ if __name__ == "__main__":
         title = noticia.find('h3').text
         iv_link = f'https://t.me/iv?url={urllib.parse.quote_plus(link)}&rhash=60af523a41b39d'
         try:
-            send_message(title, iv_link, link
+            send_message(title, iv_link, link)
             base.bluesky_post('🗞 Agência Brasília', title, link)
         except:
             pass
