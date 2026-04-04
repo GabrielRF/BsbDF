@@ -8,13 +8,14 @@ import xmltodict
 from telebot import types
 
 def get_alerts():
-    feed = feedparser.parse('https://apiprevmet3.inmet.gov.br/avisos/rss')
+    user_agent = {"User-Agent": "Mozilla/5.0 (compatible; BsbDFBot/1.0)"}
+    feed = feedparser.parse('https://apiprevmet3.inmet.gov.br/avisos/rss', request_headers=user_agent)
     for item in feed['items']:
         alert = {}
         if 'Distrito Federal' not in str(item['description']):
             continue
         alert['title'] = item['title']
-        response = requests.get(item['link'])
+        response = requests.get(item['link'], headers=user_agent)
         data = xmltodict.parse(response.content)
         creation = data['alert']['info']['onset']
         creation = datetime.datetime.strptime(creation, '%Y-%m-%dT%H:%M:%S%z')

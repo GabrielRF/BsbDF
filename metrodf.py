@@ -27,7 +27,7 @@ def send_message(title, iv_link, link):
 
 if __name__ == "__main__":
     html = get_news_list()
-    for noticia in html.findAll('article')[:5]:
+    for noticia in html.find_all('article')[:5]:
         link = noticia.findAll('a')
         title = link[1].text
         link = link[1]['href']

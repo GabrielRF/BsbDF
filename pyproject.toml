@@ -7,6 +7,8 @@ requires-python = ">=3.13"
 dependencies = [
     "atproto>=0.0.65",
     "bs4>=0.0.2",
+    "cloudscraper>=1.2.71",
     "feedparser>=6.0.12",
     "pytelegrambotapi>=4.32.0",
+    "xmltodict>=1.0.4",
 ]

@@ -38,7 +38,7 @@ def send_message(title, iv_link, link):
 if __name__ == "__main__":
     html = get_news_list()
     noticias = html.find('div', {'class': 'entries'})
-    for noticia in noticias.findAll('article', {'class': 'entry-card'}):
+    for noticia in noticias.find_all('article', {'class': 'entry-card'}):
         try:
             link = noticia.find('a')['href']
         except TypeError:
