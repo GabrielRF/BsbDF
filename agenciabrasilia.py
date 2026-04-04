@@ -35,7 +35,7 @@ if __name__ == "__main__":
     html = get_news_list()
     if not html:
         exit()
-    for noticia in html.findAll('div', {'class': 'content-card-result'})[:5]:
+    for noticia in html.find_all('div', {'class': 'content-card-result'})[:5]:
         try:
             link = noticia.find('a')['href']
         except TypeError:
