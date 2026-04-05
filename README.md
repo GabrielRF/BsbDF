@@ -4,7 +4,7 @@
 
 ## Scripts
 
-Este repositório reúne os scripts usados no canal [@BsbDF](https://t.me/BsbDF) no Telegram. O foco do canal é reunir informações e notícias sobre a capital federal. 
+Este repositório reúne os scripts usados no canal [@BsbDF](https://t.me/BsbDF) no Telegram e no perfil [@bsbdf.grf.xyz](https://bsky.app/profile/bsbdf.grf.xyz) no BlueSky. O foco é reunir informações e notícias sobre a capital federal. 
 
 ### base.py
 
