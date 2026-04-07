@@ -32,6 +32,10 @@ if __name__ == "__main__":
         if base.check_history(link):
             continue
         title = noticia.find('h5').text.strip()
-        iv_link = f'https://t.me/iv?url={urllib.parse.quote_plus(link)}&rhash=736e42261d23d3' 
-        send_message(title, iv_link, link)
+        iv_link = f'https://t.me/iv?url={urllib.parse.quote_plus(link)}&rhash=736e42261d23d3'
+        try:
+            send_message(title, iv_link, link)
+            base.bluesky_post('🔥 CBM DF', title, link)
+        except:
+            pass
         base.add_to_history(link)
